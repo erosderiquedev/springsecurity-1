@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  spring_security_postgres_lab:
+    image: postgres:16.2-alpine3.19
+    container_name: spring_postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - data:/var/lib/postgresql/data:rw
+    environment:
+      - POSTGRES_DB=simplified_tweeter-api
+      - POSTGRES_PASSWORD=12345678
+      - POSTGRES_USER=erosdev
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U erosdev"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  data:
+
+
+
+
